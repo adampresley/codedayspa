@@ -1,0 +1,7 @@
+#
+# Default configuration for MongoDB
+#
+dbpath = data
+bind_ip = 127.0.0.1
+nohttpinterface = true
+logpath = server/mongodb/log/mongodb.log
