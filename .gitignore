@@ -1,0 +1,21 @@
+#
+# Ignore all OpenBD bak file and work directories
+#
+WEB-INF/bluedragon/bluedragon.xml.bak.*
+WEB-INF/bluedragon/work/**
+
+
+#
+# Ignore all Tomcat working and log directories
+#
+server/tomcat/logs/**
+server/tomcat/work/**
+
+
+#
+# Ignore MongoDB journals, locks and logs
+#
+data/codedayspa.*
+data/journal/**
+data/mongod.lock
+server/mongodb/log/mongodb*
