@@ -101,7 +101,7 @@
 #
 # Java options
 #
-export JAVA_OPTS="-server -Xms256m -Xmx768m -XX:PermSize=64m -XX:MaxPermSize=96m"
+export JAVA_OPTS="-server -Xms128m -Xmx256m -XX:PermSize=32m -XX:MaxPermSize=64m"
 
 
 

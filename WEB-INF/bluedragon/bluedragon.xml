@@ -22,9 +22,9 @@
     <nativelibdir>/WEB-INF/bin</nativelibdir>
     <errorhandler></errorhandler>
     <functionscopedvariables>false</functionscopedvariables>
-    <lastupdated>12/Mar/2012 19:58.26</lastupdated>
-    <whitespacecomp>true</whitespacecomp>
+    <lastupdated>26/Mar/2012 11:32.42</lastupdated>
     <allowedips></allowedips>
+    <whitespacecomp>true</whitespacecomp>
   </system>
   <file>
     <maxfiles>1000</maxfiles>
@@ -37,33 +37,34 @@
   <cfquery>
     <cache>true</cache>
     <cachecount>1000</cachecount>
+    <slowlog>1</slowlog>
     <dbdrivers>
-      <driver name="other">
-        <datasourceconfigpage>other.cfm</datasourceconfigpage>
-        <version></version>
-        <name>other</name>
-        <driverdescription>Other JDBC Driver</driverdescription>
-        <drivername></drivername>
-        <jdbctype></jdbctype>
-        <provider></provider>
-        <defaultport></defaultport>
-      </driver>
       <driver name="microsoft sql server (jtds)">
         <datasourceconfigpage>sqlserver-jtds.cfm</datasourceconfigpage>
         <version>1.2.5</version>
         <name>microsoft sql server (jtds)</name>
-        <driverdescription>Microsoft SQL Server (jTDS)</driverdescription>
         <drivername>net.sourceforge.jtds.jdbc.Driver</drivername>
+        <driverdescription>Microsoft SQL Server (jTDS)</driverdescription>
         <jdbctype>4</jdbctype>
         <provider>jTDS</provider>
         <defaultport>1433</defaultport>
+      </driver>
+      <driver name="other">
+        <datasourceconfigpage>other.cfm</datasourceconfigpage>
+        <version></version>
+        <name>other</name>
+        <drivername></drivername>
+        <driverdescription>Other JDBC Driver</driverdescription>
+        <jdbctype></jdbctype>
+        <provider></provider>
+        <defaultport></defaultport>
       </driver>
       <driver name="microsoft sql server (microsoft)">
         <datasourceconfigpage>sqlserver-ms.cfm</datasourceconfigpage>
         <version>2.0</version>
         <name>microsoft sql server (microsoft)</name>
-        <driverdescription>Microsoft SQL Server (Microsoft)</driverdescription>
         <drivername>com.microsoft.sqlserver.jdbc.SQLServerDriver</drivername>
+        <driverdescription>Microsoft SQL Server (Microsoft)</driverdescription>
         <jdbctype>4</jdbctype>
         <provider>Microsoft</provider>
         <defaultport>1433</defaultport>
@@ -72,8 +73,8 @@
         <datasourceconfigpage>h2-embedded.cfm</datasourceconfigpage>
         <version>1.2.134</version>
         <name>h2 embedded (h2)</name>
-        <driverdescription>H2 Embedded (H2)</driverdescription>
         <drivername>org.h2.Driver</drivername>
+        <driverdescription>H2 Embedded (H2)</driverdescription>
         <jdbctype>4</jdbctype>
         <provider>H2</provider>
         <defaultport></defaultport>
@@ -82,8 +83,8 @@
         <datasourceconfigpage>oracle.cfm</datasourceconfigpage>
         <version>10.2.0.4</version>
         <name>oracle (oracle)</name>
-        <driverdescription>Oracle (Oracle)</driverdescription>
         <drivername>oracle.jdbc.OracleDriver</drivername>
+        <driverdescription>Oracle (Oracle)</driverdescription>
         <jdbctype>4</jdbctype>
         <provider>Oracle</provider>
         <defaultport>1521</defaultport>
@@ -92,8 +93,8 @@
         <datasourceconfigpage>mysql5.cfm</datasourceconfigpage>
         <version>5.1.12</version>
         <name>mysql 4/5</name>
-        <driverdescription>MySQL 4/5 (MySQL)</driverdescription>
         <drivername>com.mysql.jdbc.Driver</drivername>
+        <driverdescription>MySQL 4/5 (MySQL)</driverdescription>
         <jdbctype>4</jdbctype>
         <provider>MySQL</provider>
         <defaultport>3306</defaultport>
@@ -102,21 +103,20 @@
         <datasourceconfigpage>postgresql.cfm</datasourceconfigpage>
         <version>8.4-701</version>
         <name>postgresql (postgresql)</name>
-        <driverdescription>PostgreSQL (PostgreSQL)</driverdescription>
         <drivername>org.postgresql.Driver</drivername>
+        <driverdescription>PostgreSQL (PostgreSQL)</driverdescription>
         <jdbctype>4</jdbctype>
         <provider>PostgreSQL</provider>
         <defaultport>5432</defaultport>
       </driver>
     </dbdrivers>
-    <slowlog>1</slowlog>
   </cfquery>
   <debugoutput>
+    <enabled>false</enabled>
     <executiontimes>
       <show>true</show>
       <highlight>250</highlight>
     </executiontimes>
-    <enabled>false</enabled>
     <exceptions>
       <show>true</show>
     </exceptions>
@@ -126,6 +126,10 @@
     <database>
       <show>true</show>
     </database>
+    <timer>
+      <show>false</show>
+    </timer>
+    <ipaddresses></ipaddresses>
     <variables>
       <url>true</url>
       <form>true</form>
@@ -134,17 +138,13 @@
       <client>true</client>
       <server>true</server>
       <request>true</request>
-      <session>true</session>
       <application>true</application>
+      <session>true</session>
       <local>true</local>
       <cffile>true</cffile>
       <show>false</show>
       <variables>true</variables>
     </variables>
-    <ipaddresses></ipaddresses>
-    <timer>
-      <show>false</show>
-    </timer>
   </debugoutput>
   <openbdadminapi>
     <version>2.0</version>
@@ -161,10 +161,6 @@
     <enabled>true</enabled>
     <clientstorage>cookie</clientstorage>
   </cfapplication>
-  <cfcachecontent>
-    <datasource></datasource>
-    <total>1000</total>
-  </cfcachecontent>
   <cfmail>
     <usetls>false</usetls>
     <interval>240</interval>
@@ -177,6 +173,10 @@
     <threads>1</threads>
     <catchemail></catchemail>
   </cfmail>
+  <cfcachecontent>
+    <datasource></datasource>
+    <total>1000</total>
+  </cfcachecontent>
   <cfmlcustomtags>
     <mapping name="cf">
       <directory>/WEB-INF/customtags</directory>

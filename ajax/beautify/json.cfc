@@ -19,15 +19,12 @@
 		<cfif !rc.grid>
 			<cfif trim(left(jsonToParse, 1)) EQ "[">
 				<cfset JSON = createObject("java", "net.sf.json.JSONArray") />
-				<cfset serializer = JSON.fromObject(jsonToParse) />
-
-				<cfset result.output = htmlCodeFormat(serializer.toString(3, 0)) />
 			<cfelse>
 				<cfset JSON = createObject("java", "net.sf.json.JSONObject") />
-				<cfset serializer = JSON.fromObject(jsonToParse) />
-
-				<cfset result.output = htmlCodeformat(serializer.toString(3, 0)) />
 			</cfif>
+
+			<cfset serializer = JSON.fromObject(jsonToParse) />
+			<cfset result.output = htmlCodeFormat(serializer.toString(3, 0)) />
 		<cfelse>
 			<cfset result.output = jsonToParse />
 		</cfif>

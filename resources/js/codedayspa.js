@@ -70,7 +70,7 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 			
 			if (evalResponse) {
 				try {
-					parsed = eval("(" + response + ")");
+					parsed = response;
 				}
 				catch (e) {
 					CodeDaySpa.unblock();
