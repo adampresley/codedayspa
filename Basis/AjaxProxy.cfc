@@ -34,7 +34,6 @@
 		
 		<cfset init() />
 
-		<cfparam name="rc.debug" default="false" />
 
 		<cftry>
 			<cfset validateAccess() />
@@ -60,9 +59,10 @@
 					message = cfcatch.message
 				} />
 
-				<cfif rc.debug>
-					<cfrethrow />
-				</cfif>
+				<!--- 
+					Call any custom error handling
+				--->
+				<cfset onAjaxError(cfcatch) />
 			</cfcatch>
 			</cftry>
 			
@@ -82,6 +82,14 @@
 			
 	</cffunction>	
 	
+	<!---
+		Function: onAjaxError
+		Called in the event there is an error while processing the AJAX request.
+		Override this in your version of AjaxProxy.cfc.
+	--->
+	<cffunction name="onAjaxError" access="private" output="false">
+		<cfargument name="errorInfo" />
+	</cffunction>
 
 	<cffunction name="__validateAction" access="private" output="false">
 		<cfset var rc = request.rc />
