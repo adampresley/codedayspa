@@ -6,10 +6,15 @@
 --->
 <cfcomponent extends="Basis.AjaxProxy" output="false">
 	
-	<cffunction name="validateAccess" access="private" output="false">
-		<cfif 1 NEQ 1>
-			<cfthrow type="custom" message="You are an invalid user, and must be logged in." />
-		</cfif>
+	<cffunction name="onAjaxError" access="private" output="false">
+		<cfargument name="errorInfo" />
+
+		<cfdump var="#arguments.errorInfo#" />
+		<cfabort />
+		<cfreturn {
+			"message" = "Custom error handler: #arguments.errorInfo.message#",
+			"success" = false
+		} />
 	</cffunction>
 
 </cfcomponent>

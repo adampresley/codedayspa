@@ -1,182 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <server>
   <system>
-    <buffersize>0</buffersize>
-    <strictarraypassbyreference>false</strictarraypassbyreference>
-    <password>admin</password>
-    <assert>false</assert>
-    <missingtemplatehandler></missingtemplatehandler>
-    <tempdirectory>/WEB-INF/bluedragon/work/temp</tempdirectory>
-    <lastfile>/code/coldfusion/codedayspa/server/tomcat/webapps/../../../WEB-INF/bluedragon/bluedragon.xml.bak.1</lastfile>
-    <runtimelogging>true</runtimelogging>
-    <deniedips></deniedips>
-    <defaultcharset>UTF-8</defaultcharset>
-    <component-cfc>/WEB-INF/bluedragon/component.cfc</component-cfc>
-    <runtimeloggingmax>100</runtimeloggingmax>
-    <scriptsrc>/bluedragon/scripts</scriptsrc>
-    <formurlcombined>false</formurlcombined>
-    <servercfc>/Server.cfc</servercfc>
-    <debug>true</debug>
     <legacyformvalidation>false</legacyformvalidation>
-    <scriptprotect>false</scriptprotect>
+    <licensekey></licensekey>
+    <component-cfc>/WEB-INF/bluedragon/component.cfc</component-cfc>
+    <strictarraypassbyreference>false</strictarraypassbyreference>
+    <whitespacecomp>false</whitespacecomp>
     <nativelibdir>/WEB-INF/bin</nativelibdir>
+    <missingtemplatehandler></missingtemplatehandler>
+    <lastfile>c:\code\codedayspa\server\tomcat\webapps\..\..\..\WEB-INF\bluedragon\bluedragon.xml.bak.1</lastfile>
     <errorhandler></errorhandler>
-    <functionscopedvariables>false</functionscopedvariables>
-    <lastupdated>26/Mar/2012 11:32.42</lastupdated>
-    <allowedips></allowedips>
-    <whitespacecomp>true</whitespacecomp>
+    <password>admin</password>
+    <tempdirectory>/WEB-INF/bluedragon/work/temp</tempdirectory>
+    <buffersize>0</buffersize>
+    <lastupdated>27/Mar/2012 17:57.25</lastupdated>
+    <defaultcharset>utf-8</defaultcharset>
   </system>
   <file>
     <maxfiles>1000</maxfiles>
     <trustcache>false</trustcache>
   </file>
-  <cfchart>
-    <cachesize>1000</cachesize>
-    <storage>file</storage>
-  </cfchart>
+  <javacustomtags>
+    <classes>/WEB-INF/classes</classes>
+    <mapping name="cfx_javabluedragonhello">
+      <name>cfx_javabluedragonhello</name>
+      <displayname>CFX_JavaBlueDragonHello</displayname>
+      <description>A simple Java CFX tag example</description>
+      <class>com.newatlanta.BlueDragonHello</class>
+    </mapping>
+  </javacustomtags>
+  <nativecustomtags>
+    <mapping name="cfx_nativebluedragonhello">
+      <function>ProcessTagRequest</function>
+      <keeploaded>true</keeploaded>
+      <name>cfx_nativebluedragonhello</name>
+      <module>/WEB-INF/customtags/BlueDragonHello.dll</module>
+      <displayname>CFX_NativeBlueDragonHello</displayname>
+      <description>A simple C++ CFX tag example</description>
+    </mapping>
+  </nativecustomtags>
+  <fonts>
+    <dirs>C:\Windows\Fonts</dirs>
+  </fonts>
   <cfquery>
     <cache>true</cache>
-    <cachecount>1000</cachecount>
-    <slowlog>1</slowlog>
-    <dbdrivers>
-      <driver name="microsoft sql server (jtds)">
-        <datasourceconfigpage>sqlserver-jtds.cfm</datasourceconfigpage>
-        <version>1.2.5</version>
-        <name>microsoft sql server (jtds)</name>
-        <drivername>net.sourceforge.jtds.jdbc.Driver</drivername>
-        <driverdescription>Microsoft SQL Server (jTDS)</driverdescription>
-        <jdbctype>4</jdbctype>
-        <provider>jTDS</provider>
-        <defaultport>1433</defaultport>
-      </driver>
-      <driver name="other">
-        <datasourceconfigpage>other.cfm</datasourceconfigpage>
-        <version></version>
-        <name>other</name>
-        <drivername></drivername>
-        <driverdescription>Other JDBC Driver</driverdescription>
-        <jdbctype></jdbctype>
-        <provider></provider>
-        <defaultport></defaultport>
-      </driver>
-      <driver name="microsoft sql server (microsoft)">
-        <datasourceconfigpage>sqlserver-ms.cfm</datasourceconfigpage>
-        <version>2.0</version>
-        <name>microsoft sql server (microsoft)</name>
-        <drivername>com.microsoft.sqlserver.jdbc.SQLServerDriver</drivername>
-        <driverdescription>Microsoft SQL Server (Microsoft)</driverdescription>
-        <jdbctype>4</jdbctype>
-        <provider>Microsoft</provider>
-        <defaultport>1433</defaultport>
-      </driver>
-      <driver name="h2 embedded (h2)">
-        <datasourceconfigpage>h2-embedded.cfm</datasourceconfigpage>
-        <version>1.2.134</version>
-        <name>h2 embedded (h2)</name>
-        <drivername>org.h2.Driver</drivername>
-        <driverdescription>H2 Embedded (H2)</driverdescription>
-        <jdbctype>4</jdbctype>
-        <provider>H2</provider>
-        <defaultport></defaultport>
-      </driver>
-      <driver name="oracle (oracle)">
-        <datasourceconfigpage>oracle.cfm</datasourceconfigpage>
-        <version>10.2.0.4</version>
-        <name>oracle (oracle)</name>
-        <drivername>oracle.jdbc.OracleDriver</drivername>
-        <driverdescription>Oracle (Oracle)</driverdescription>
-        <jdbctype>4</jdbctype>
-        <provider>Oracle</provider>
-        <defaultport>1521</defaultport>
-      </driver>
-      <driver name="mysql 4/5">
-        <datasourceconfigpage>mysql5.cfm</datasourceconfigpage>
-        <version>5.1.12</version>
-        <name>mysql 4/5</name>
-        <drivername>com.mysql.jdbc.Driver</drivername>
-        <driverdescription>MySQL 4/5 (MySQL)</driverdescription>
-        <jdbctype>4</jdbctype>
-        <provider>MySQL</provider>
-        <defaultport>3306</defaultport>
-      </driver>
-      <driver name="postgresql (postgresql)">
-        <datasourceconfigpage>postgresql.cfm</datasourceconfigpage>
-        <version>8.4-701</version>
-        <name>postgresql (postgresql)</name>
-        <drivername>org.postgresql.Driver</drivername>
-        <driverdescription>PostgreSQL (PostgreSQL)</driverdescription>
-        <jdbctype>4</jdbctype>
-        <provider>PostgreSQL</provider>
-        <defaultport>5432</defaultport>
-      </driver>
-    </dbdrivers>
   </cfquery>
-  <debugoutput>
-    <enabled>false</enabled>
-    <executiontimes>
-      <show>true</show>
-      <highlight>250</highlight>
-    </executiontimes>
-    <exceptions>
-      <show>true</show>
-    </exceptions>
-    <tracepoints>
-      <show>false</show>
-    </tracepoints>
-    <database>
-      <show>true</show>
-    </database>
-    <timer>
-      <show>false</show>
-    </timer>
-    <ipaddresses></ipaddresses>
-    <variables>
-      <url>true</url>
-      <form>true</form>
-      <cookie>true</cookie>
-      <cgi>true</cgi>
-      <client>true</client>
-      <server>true</server>
-      <request>true</request>
-      <application>true</application>
-      <session>true</session>
-      <local>true</local>
-      <cffile>true</cffile>
-      <show>false</show>
-      <variables>true</variables>
-    </variables>
-  </debugoutput>
-  <openbdadminapi>
-    <version>2.0</version>
-    <lastupdated>27/Feb/2012 23:15:13</lastupdated>
-  </openbdadminapi>
   <cfapplication>
-    <j2eesession>true</j2eesession>
-    <clientglobalupdatesdisabled>true</clientglobalupdatesdisabled>
-    <applicationtimeout>#CreateTimeSpan(2,0,0,0)#</applicationtimeout>
-    <clientpurgeenabled>true</clientpurgeenabled>
-    <sessiontimeout>#CreateTimeSpan(0,0,20,0)#</sessiontimeout>
-    <cf5clientdata>false</cf5clientdata>
-    <clientexpiry>90</clientexpiry>
     <enabled>true</enabled>
     <clientstorage>cookie</clientstorage>
+    <sessiontimeout>#CreateTimeSpan(0,0,20,0)#</sessiontimeout>
+    <applicationtimeout>#CreateTimeSpan(2,0,0,0)#</applicationtimeout>
+    <j2eesession>false</j2eesession>
   </cfapplication>
   <cfmail>
-    <usetls>false</usetls>
     <interval>240</interval>
-    <charset>UTF-8</charset>
-    <domain></domain>
-    <smtpport>25</smtpport>
     <smtpserver>127.0.0.1</smtpserver>
-    <timeout>60</timeout>
-    <usessl>false</usessl>
-    <threads>1</threads>
-    <catchemail></catchemail>
+    <charset>UTF-8</charset>
+    <smtpport>25</smtpport>
   </cfmail>
-  <cfcachecontent>
-    <datasource></datasource>
-    <total>1000</total>
-  </cfcachecontent>
   <cfmlcustomtags>
     <mapping name="cf">
       <directory>/WEB-INF/customtags</directory>

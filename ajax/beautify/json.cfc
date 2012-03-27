@@ -3,9 +3,7 @@
 	<cffunction name="process" output="false">
 		<cfset var jsonToParse = "" />
 		<cfset var result = { output = "" } />
-
-		<cfset var JSON = "" />
-		<cfset var serializer = "" />
+		<cfset var beautifier = application.theFactory.getService("Beautifier") />
 
 		<cfparam name="rc.grid" default="false" />
 
@@ -17,14 +15,7 @@
 		</cfif>
 
 		<cfif !rc.grid>
-			<cfif trim(left(jsonToParse, 1)) EQ "[">
-				<cfset JSON = createObject("java", "net.sf.json.JSONArray") />
-			<cfelse>
-				<cfset JSON = createObject("java", "net.sf.json.JSONObject") />
-			</cfif>
-
-			<cfset serializer = JSON.fromObject(jsonToParse) />
-			<cfset result.output = htmlCodeFormat(serializer.toString(3, 0)) />
+			<cfset result.output = beautifier.jsonStringToHtml(jsonToParse) />
 		<cfelse>
 			<cfset result.output = jsonToParse />
 		</cfif>
