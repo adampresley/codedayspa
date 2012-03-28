@@ -8,16 +8,14 @@
 	<cfset variables.frameworkSettings.reloadFrameworkEveryRequest = false />
 	<cfset variables.frameworkSettings.flushBufferBeforeOutput = false />
 
+	<!---
+		Register MongoDB
+	--->
+	<cfset application.dbName = "codedayspa" />
+	<cfset mongoRegister(name = "codedayspa", server = "127.0.0.1", db = application.dbName) />
+
 	<cffunction name="applicationStart" output="false">
 		<cfset application.version = "0.1" />
-	</cffunction>
-
-	<cffunction name="preRequest" output="false">
-		<!---
-			Register MongoDB
-		--->
-		<cfset request.dbName = "codedayspa" />
-		<cfset mongoRegister(name = "codedayspa", server = "127.0.0.1", db = request.dbName) />
 	</cffunction>
 
 </cfcomponent>
