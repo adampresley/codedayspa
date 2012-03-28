@@ -1,7 +1,7 @@
 <cfcomponent extends="Basis.App" output="false">
 	
 	<cfset this.name = "codedayspa_0_1" />
-	<cfset this.applicationTimeout = createTimeSpan(0, 2, 0, 0) />
+	<cfset this.applicationTimeout = createTimeSpan(1, 0, 0, 0) />
 	<cfset this.clientManagement = false />
 	<cfset this.sessionManagement = false />
 	
