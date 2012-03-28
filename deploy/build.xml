@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="codedayspa" default="war" basedir="../">
+	<propertyfile file="build.properties">
+		<entry key="majorVer" type="int" default="0" pattern="0" />
+		<entry key="minorVer" type="int" default="0" pattern="00" />
+		<entry key="buildVer" type="int" default="0" operation="+" pattern="0000" />
+	</propertyfile>
+
+	<property file="build.properties" />
+
+	<property name="deploy.dir" value="${basedir}/deploy" />
+	<property name="lib.dir" value="lib" />
+	<property name="ivyCache.dir" value="ivy-cache" />
+	<property name="ivy.default.ivy.user.dir" value="${basedir}/${ivyCache.dir}" />
+	<property name="ant.lib.task" value="${basedir}/${lib.dir}" />
+	<property name="war.filename" value="codedayspa-${majorVer}.${minorVer}.${buildVer}.war" />
+
+	<path id="lib.path.id">
+		<fileset dir="${lib.dir}" />
+		<fileset dir="${ivyCache.dir}" />
+		<fileset dir="${ant.lib.task}" />
+	</path>
+
+	<target name="war" description="Builds a production ready WAR">
+		<echo message="---------------------------------------------" />
+		<echo message="Build production-ready WAR" />
+		<echo message="---------------------------------------------" />
+		<echo message="" />
+
+		<echo message="Cleaning..." />
+		<delete>
+			<fileset dir="." includes="*.war" />
+		</delete>
+
+		<echo message="Building..." />
+		<zip destfile="${deploy.dir}/${war.filename}">
+			<zipfileset dir="${basedir}/Basis" prefix="Basis" />
+			<zipfileset dir="${basedir}/WEB-INF" prefix="WEB-INF" />
+			<zipfileset dir="${basedir}/ajax" prefix="ajax" />
+			<zipfileset dir="${basedir}/bluedragon" prefix="bluedragon" />
+			<zipfileset dir="${basedir}/controllers" prefix="controllers" />
+			<zipfileset dir="${basedir}/layouts" prefix="layouts" />
+			<zipfileset dir="${basedir}/resources" prefix="resources" />
+			<zipfileset dir="${basedir}/model" prefix="model" />
+			<zipfileset dir="${basedir}/views" prefix="views" />
+			<zipfileset dir="${basedir}" includes="*.cfc" />
+			<zipfileset dir="${basedir}" includes="*.cfm" />
+		</zip>
+	</target>
+
+	<target name="resolve-dependencies" description="Resolves IVY dependencies" depends="war">
+		<ivy:retrieve pattern="${ivyCache.dir}/[artifact].[ext]" type="jar" />
+	</target>
+
+	<target name="deploy" description="Build and deploy the Code Day Spa application" depends="resolve-dependencies">
+		<taskdef name="jelastic" classname="com.jelastic.Jelastic" classpathref="lib.path.id" />
+		<jelastic email="" password="" dir="." filename="${war.filename}" context="ROOT" environment="unplexing" />
+	</target>
+</project>

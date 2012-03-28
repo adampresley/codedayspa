@@ -19,3 +19,8 @@ data/codedayspa.*
 data/journal/**
 data/mongod.lock
 server/mongodb/log/mongodb*
+
+#
+# Ignore WAR deployment files
+#
+deploy/*.war

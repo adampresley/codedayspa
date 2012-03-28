@@ -6,7 +6,7 @@
 	<cfset this.sessionManagement = false />
 	
 	<cfset variables.frameworkSettings.reloadFrameworkEveryRequest = false />
-	<cfset variables.frameworkSettings.flushBufferBeforeOutput = false />
+	<cfset variables.frameworkSettings.flushBufferBeforeOutput = true />
 
 	<!---
 		Register MongoDB
