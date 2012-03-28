@@ -9,10 +9,15 @@
 	<cffunction name="onAjaxError" access="private" output="false">
 		<cfargument name="errorInfo" />
 
-		<cfdump var="#arguments.errorInfo#" />
-		<cfabort />
+		<cfset writeLog(
+			text = "ACTION = #request.rc.action# : #arguments.errorInfo.message#",
+			type = "Error",
+			log = "application"
+		) />
+
+		<cfheader statusCode="500" statusText="Internal Server Error" />
 		<cfreturn {
-			"message" = "Custom error handler: #arguments.errorInfo.message#",
+			"message" = "An error occurred: #arguments.errorInfo.message#",
 			"success" = false
 		} />
 	</cffunction>

@@ -1,5 +1,20 @@
 CodeDaySpa = {
 	BeautifyJsonPage: { },
+	BeautifyWsdlPage: { },
+
+	ajax: function(config) {
+		var
+			data = $.extend(config.data, { method: "process" });
+
+		config = $.extend({
+			dataType: "json",
+			data: data,
+			url: "/ajaxProxy.cfc",
+			type: "POST"
+		}, config);
+
+		$.ajax(config);
+	},
 
 	block: function(msg, el) {
 		if (el !== undefined) {
@@ -17,6 +32,20 @@ CodeDaySpa = {
 		else {
 			$.unblockUI();
 		}
+	},
+
+	showAjaxError: function(xhr, callback) {
+		var r = $.trim(xhr.responseText);
+		var parsed = $.parseJSON(r);
+
+		CodeDaySpa.unblock();
+
+		if (parsed !== null && parsed !== undefined && "message" in parsed) {
+			new BootstrapPlus.Modal({
+				header: "Error",
+				body: "<p>" + parsed.message + "</p>"
+			});
+		}
 	}
 };
 
@@ -26,6 +55,8 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 		__init = function() {
 			$("#btnParse").on("click", __parse);
 			$("#btnClear").on("click", __clear);
+
+			$("#jsonString").focus()
 		},
 
 		__parse = function() {
@@ -40,26 +71,23 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 			CodeDaySpa.block("Beautifying JSON...");
 
 			if ($("#chkGridResults").attr("checked") && $.trim($("#jsonUrl").val()) === "") {
-				__onParseSuccess($("#jsonString").val(), false);
+				__onParseSuccess({ output: $("#jsonString").val() });
 			}
 			else {
-				$.ajax({
-					url: "/ajaxProxy.cfc?method=process",
+				CodeDaySpa.ajax({
 					data: {
 						action: "beautify.json",
 						jsonString: $("#jsonString").val(),
 						jsonUrl: $("#jsonUrl").val(),
 						grid: (($("#chkGridResults").attr("checked")) ? true : false)
 					},
-					type: "POST",
-					dataType: "json",
 					success: __onParseSuccess,
 					error: __onParseError
 				});
 			}
 		},
 
-		__onParseSuccess = function(response, evalResponse) {
+		__onParseSuccess = function(response) {
 			var 
 				data = response.output,
 				rendered = null,
@@ -68,48 +96,34 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 				parsed = [],
 				e;
 			
-			if (evalResponse) {
-				try {
-					parsed = response;
-				}
-				catch (e) {
-					CodeDaySpa.unblock();
-					new BootstrapPlus.Modal({
-						header: "Error",
-						body: "<p>We are sorry, but something went wrong during the beautification process. Please try again</p>"
-					});
-
-					return;
-				}
-			}
-
 			if ($("#chkGridResults").attr("checked")) {
-				if (parsed.output) {
-					parsed = parsed.output;
-				}
-				
-				if (parsed.length > 0) {
-					rendered = '<table class="table table-striped table-bordered table-condensed"><thead><tr>';
+				try {
+					data = $.parseJSON(data);
 
-					for (item in parsed[0]) {
-						rendered += '<th>' + item + "</th>";
-					}
+					if (data.length > 0) {
+						rendered = '<table class="table table-striped table-bordered table-condensed"><thead><tr>';
 
-					rendered += '</tr></thead><tbody>';
-
-					for (index = 0; index < parsed.length; index++) {
-						rendered += '<tr>';
-
-						for (item in parsed[index]) {
-							rendered += '<td>' + parsed[index][item] + '</td>';
+						for (item in data[0]) {
+							rendered += '<th>' + item + "</th>";
 						}
 
-						rendered += '</tr>';
-					}
+						rendered += '</tr></thead><tbody>';
 
-					rendered += '</tbody></table>';
+						for (index = 0; index < data.length; index++) {
+							rendered += '<tr>';
+
+							for (item in data[index]) {
+								rendered += '<td>' + data[index][item] + '</td>';
+							}
+
+							rendered += '</tr>';
+						}
+
+						rendered += '</tbody></table>';
+					}
 				}
-				else {
+				catch (e) {
+					CodeDaySpa.showAjaxError({ responseText: "{ \"message\": \"There was a problem Beautifying your JSON. Perhaps a syntax/validation issue?\" }" });
 					rendered = "<p>No results to beautify. Did you make sure that your data was an array?</p>";
 				}
 			}
@@ -120,30 +134,12 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 			$("#results").html(rendered);
 			$("#resultsContainer").show();
 
-			$("html, body").animate({ scrollTop: $("#results").offset().top }, 1000);
+			$("html, body").animate({ scrollTop: $("#results").offset().top - 75 }, 1000);
 			CodeDaySpa.unblock();
 		},
 
-		__onParseError = function(xhr, status, error) {
-			var r = $.trim(xhr.responseText);
-			var parsed = $.parseJSON(r);
-
-			Adam.unblock();
-
-			if (parsed !== null && parsed !== undefined && "message" in parsed) {
-				apMessageBox.error({
-					message: parsed.message,
-					width: 450,
-					height: 300
-				});
-			}
-			else {
-				apMessageBox.error({
-					message: "Yikes! An error didn't even come back from the server. That's bad, mmmkay?",
-					height: 300,
-					width: 450
-				});
-			}
+		__onParseError = function(xhr) {
+			CodeDaySpa.showAjaxError(xhr);
 		},
 
 		__clear = function() {
@@ -156,8 +152,67 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 		},
 
 		__this = this,
-		__config = $.extend({}, config);
+		__config = $.extend(config, {});
 
 	__init();
 };
-CodeDaySpa.BeautifyJsonPage.prototype = new ap.Observable();
+YAOF.attach(CodeDaySpa.BeautifyJsonPage);
+
+
+CodeDaySpa.BeautifyWsdlPage = function(config) {
+	var
+		__init = function() {
+			$("#btnParse").on("click", __parse);
+			$("#btnClear").on("click", __clear);
+
+			$("#wsdlUrl").focus();
+		},
+
+		__parse = function() {
+			if ($.trim($("#wsdlUrl").val()) === "") {
+				new BootstrapPlus.Modal({
+					header: "Error",
+					body: "<p>You must provide a URL with a WSDL document...</p>"
+				});
+				return;
+			}
+
+			CodeDaySpa.block("Beautifying WSDL...");
+
+			CodeDaySpa.ajax({
+				data: {
+					action: "beautify.wsdl",
+					wsdlUrl: $("#wsdlUrl").val()
+				},
+				success: __onParseSuccess,
+				error: __onParseError
+			});
+		},
+
+		__onParseSuccess = function(response, evalResponse) {
+			$("#results").html(response.output);
+			$("#resultsContainer").show();
+
+			$("html, body").animate({ scrollTop: $("#results").offset().top - 75 }, 1000);
+			CodeDaySpa.unblock();
+		},
+
+		__onParseError = function(xhr) {
+			CodeDaySpa.showAjaxError(xhr);
+		},
+
+		__clear = function() {
+			$("#resultsContainer").fadeOut("slow", function() {
+				$("#results").html("");
+				$("html, body").animate({
+					scrollTop: $("#instructions").offset().top
+				}, 1000);
+			});
+		},
+
+		__this = this,
+		__config = $.extend(config, {});
+
+	__init();
+};
+YAOF.attach(CodeDaySpa.BeautifyWsdlPage);

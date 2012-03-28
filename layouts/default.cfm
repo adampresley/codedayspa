@@ -36,8 +36,8 @@
 	<script src="/resources/js/jquery/blockui.js"></script>
 	<script src="/resources/js/jquery/jquery.tmpl.min.js"></script>
 
-	<script src="/resources/js/BootstrapPlus.js"></script>	
-	<script src="/resources/js/adampresley.js"></script>
+	<script src="/resources/js/BootstrapPlus.js"></script>
+	<script src="/resources/js/YAOF.min.js"></script>
 	<!--- ${jsScriptIncludes:end} --->
 </head>
 
