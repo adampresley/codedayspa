@@ -34,7 +34,6 @@
 	<script src="/resources/js/bootstrap/bootstrap-carousel.js"></script>
 	<script src="/resources/js/bootstrap/bootstrap-typeahead.js"></script>
 	<script src="/resources/js/jquery/blockui.js"></script>
-	<script src="/resources/js/jquery/jquery.tmpl.min.js"></script>
 
 	<script src="/resources/js/BootstrapPlus.js"></script>
 	<script src="/resources/js/YAOF.min.js"></script>
