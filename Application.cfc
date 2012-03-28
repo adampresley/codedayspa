@@ -10,9 +10,9 @@
 
 	<!---
 		Register MongoDB
-	--->
 	<cfset application.dbName = "codedayspa" />
 	<cfset mongoRegister(name = "codedayspa", server = "127.0.0.1", db = application.dbName) />
+	--->
 
 	<cffunction name="applicationStart" output="false">
 		<cfset application.version = "0.1" />
