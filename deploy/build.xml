@@ -45,6 +45,7 @@
 			<zipfileset dir="${basedir}/views" prefix="views" />
 			<zipfileset dir="${basedir}" includes="*.cfc" />
 			<zipfileset dir="${basedir}" includes="*.cfm" />
+			<zipfileset dir="${basedir}" includes="*.ico" />
 		</zip>
 	</target>
 
