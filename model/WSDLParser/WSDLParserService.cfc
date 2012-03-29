@@ -140,12 +140,13 @@
 				</cfif>
 
 				<cfif !firstAdd>
-					<cfset result &= ", " />
-					<cfset firstAdd = false />
+					<cfset result.methodSignature &= ", " />
+					<cfset result.argumentList &= ", " />
 				</cfif>
 
 				<cfset result.methodSignature &= "#argType# #part.getName()#" />
 				<cfset result.argumentList &= "#argType# #part.getName()#" />
+				<cfset firstAdd = false />
 			</cfloop>
 		</cfif>
 
