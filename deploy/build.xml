@@ -15,37 +15,37 @@
 	<property name="ant.lib.task" value="${basedir}/${lib.dir}" />
 	<property name="war.filename" value="codedayspa-${majorVer}.${minorVer}.${buildVer}.war" />
 
+	<property name="working.dir" value="${basedir}/working" />
+	<property name="resources.dir" value="${basedir}/resources" />
+	<property name="js.dir" value="${resources.dir}/js" />
+	<property name="css.dir" value="${resources.dir}/css" />
+
 	<path id="lib.path.id">
 		<fileset dir="${lib.dir}" />
 		<fileset dir="${ivyCache.dir}" />
 		<fileset dir="${ant.lib.task}" />
 	</path>
 
-	<target name="war" description="Builds a production ready WAR">
+	<target name="war" description="Builds a production ready WAR" depends="replace-includes">
 		<echo message="---------------------------------------------" />
 		<echo message="Build production-ready WAR" />
 		<echo message="---------------------------------------------" />
 		<echo message="" />
 
-		<echo message="Cleaning..." />
-		<delete>
-			<fileset dir="." includes="*.war" />
-		</delete>
-
 		<echo message="Building..." />
 		<zip destfile="${deploy.dir}/${war.filename}">
-			<zipfileset dir="${basedir}/Basis" prefix="Basis" />
-			<zipfileset dir="${basedir}/WEB-INF" prefix="WEB-INF" />
-			<zipfileset dir="${basedir}/ajax" prefix="ajax" />
-			<zipfileset dir="${basedir}/bluedragon" prefix="bluedragon" />
-			<zipfileset dir="${basedir}/controllers" prefix="controllers" />
-			<zipfileset dir="${basedir}/layouts" prefix="layouts" />
-			<zipfileset dir="${basedir}/resources" prefix="resources" />
-			<zipfileset dir="${basedir}/model" prefix="model" />
-			<zipfileset dir="${basedir}/views" prefix="views" />
-			<zipfileset dir="${basedir}" includes="*.cfc" />
-			<zipfileset dir="${basedir}" includes="*.cfm" />
-			<zipfileset dir="${basedir}" includes="*.ico" />
+			<zipfileset dir="${working.dir}/Basis" prefix="Basis" />
+			<zipfileset dir="${working.dir}/WEB-INF" prefix="WEB-INF" />
+			<zipfileset dir="${working.dir}/ajax" prefix="ajax" />
+			<zipfileset dir="${working.dir}/bluedragon" prefix="bluedragon" />
+			<zipfileset dir="${working.dir}/controllers" prefix="controllers" />
+			<zipfileset dir="${working.dir}/layouts" prefix="layouts" />
+			<zipfileset dir="${working.dir}/resources" prefix="resources" />
+			<zipfileset dir="${working.dir}/model" prefix="model" />
+			<zipfileset dir="${working.dir}/views" prefix="views" />
+			<zipfileset dir="${working.dir}" includes="*.cfc" />
+			<zipfileset dir="${working.dir}" includes="*.cfm" />
+			<zipfileset dir="${working.dir}" includes="*.ico" />
 		</zip>
 	</target>
 
@@ -57,4 +57,123 @@
 		<taskdef name="jelastic" classname="com.jelastic.Jelastic" classpathref="lib.path.id" />
 		<jelastic email="" password="" dir="." filename="${war.filename}" context="ROOT" environment="unplexing" />
 	</target>
+
+
+	<target name="replace-includes" description="Replaces JS and CSS includes in layouts" depends="compress-resources">
+		<replaceregexp file="${working.dir}/layouts/default.cfm"
+			match="&lt;!--- @jsScriptIncludes@ ---&gt;(.*)&lt;!--- @jsScriptIncludes@ ---&gt;"
+			replace="&lt;script type=&quot;text/javascript&quot; src=&quot;/resources/js/codedayspa.min.js&quot;&gt;&lt;/script&gt;"
+			byline="false"
+			flags="is"
+		/>
+
+		<replaceregexp file="${working.dir}/layouts/default.cfm"
+			match="&lt;!--- @cssIncludes@ ---&gt;(.*)&lt;!--- @cssIncludes@ ---&gt;"
+			replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/resources/css/codedayspa.min.css&quot; /&gt;"
+			byline="false"
+			flags="is"
+		/>		
+	</target>
+
+	<target name="compress-resources" description="Compresses JavaScript and CSS files into single files. Replaces references in layout files" depends="concat-js">
+		<java jar="${deploy.dir}/yuicompressor-2.4.6.jar" fork="true">
+			<arg value="--type" />
+			<arg value="js" />
+			<arg value="--line-break" />
+			<arg value="3000" />
+			<arg value="--preserve-semi" />
+			<arg value="-o" />
+			<arg value="${working.dir}/resources/js/codedayspa.min.js" />
+			<arg value="${working.dir}/resources/js/temp.js" />
+		</java>
+
+		<java jar="${deploy.dir}/yuicompressor-2.4.6.jar" fork="true">
+			<arg value="--type" />
+			<arg value="css" />
+			<arg value="--line-break" />
+			<arg value="3000" />
+			<arg value="-o" />
+			<arg value="${working.dir}/resources/css/codedayspa.min.css" />
+			<arg value="${working.dir}/resources/css/temp.css" />
+		</java>
+
+		<delete file="${working.dir}/resources/js/temp.js" />
+		<delete file="${working.dir}/resources/css/temp.css" />
+	</target>
+
+	<target name="concat-js" description="Concatenates all JS files into a single file" depends="concat-css">
+		<concat destfile="${working.dir}/resources/js/temp.js">
+			<fileset dir="${js.dir}" includes="jquery-1.7.1.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-transition.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-alert.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-modal.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-dropdown.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-scrollspy.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-tab.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-tooltip.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-popover.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-button.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-collapse.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-carousel.js" />
+			<fileset dir="${js.dir}" includes="bootstrap-typeahead.js" />
+			<fileset dir="${js.dir}" includes="blockui.js" />
+			<fileset dir="${js.dir}" includes="BootstrapPlus.js" />
+			<fileset dir="${js.dir}" includes="YAOF.min.js" />
+			<fileset dir="${js.dir}" includes="codedayspa.js" />
+		</concat>
+	</target>
+
+	<target name="concat-css" description="Concatenates all CSS files into a single file" depends="create-working-folder">
+		<concat destfile="${working.dir}/resources/css/temp.css">
+			<fileset dir="${css.dir}" includes="cerulean.min.css" />
+			<fileset dir="${css.dir}" includes="bootstrap-responsive.css" />
+			<fileset dir="${css.dir}" includes="codedayspa.css" />
+		</concat>
+	</target>
+
+	<target name="create-working-folder" description="Creates a working folder and copy of the code for deployment" depends="clean">
+		<mkdir dir="${working.dir}" />
+
+		<copy todir="${working.dir}">
+ 			<fileset dir="${basedir}">
+ 				<include name="Basis/**" />
+ 				<include name="WEB-INF/**" />
+ 				<exclude name="WEB-INF/bluedragon/work/**" />
+ 				<include name="ajax/**" />
+ 				<include name="bluedragon/**" />
+ 				<include name="controllers/**" />
+ 				<include name="layouts/**" />
+ 				<include name="model/**" />
+ 				<include name="views/**" />
+
+ 				<include name="resources/images/**" />
+ 			</fileset>
+
+ 			<fileset dir="${basedir}" includes="*.cfm" />
+			<fileset dir="${basedir}" includes="*.cfc" />
+		</copy>
+
+		<mkdir dir="${working.dir}/resources/js" />
+		<mkdir dir="${working.dir}/resources/css" />
+
+		<copy todir="${working.dir}">
+			<fileset dir="${basedir}">
+				<include name="resources/js/html5.js" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean" description="Cleans up old working folders and backup files">
+		<echo message="Cleaning..." />
+
+		<delete>
+			<fileset dir="${deploy.dir}" includes="*.war" />
+		</delete>
+
+		<delete dir="${working.dir}" />
+		<delete>
+			<fileset dir="${basedir}/WEB-INF/bluedragon" includes="bluedragon.xml.bak.*" />
+		</delete>
+	</target>
+
 </project>

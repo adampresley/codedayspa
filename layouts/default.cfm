@@ -8,36 +8,19 @@
 	<meta name="description" content="A day spa for code and coders" />
 	<meta name="author" content="Adam Presley" />
 
+	<!--- @cssIncludes@ --->
 	<link rel="stylesheet" type="text/css" href="/resources/css/cerulean.min.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/bootstrap-responsive.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/codedayspa.css" />
+	<!--- @cssIncludes@ --->
 
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
-		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="/resources/js/html5.js"></script>
 	<![endif]-->
 
 	<!-- Le fav and touch icons -->
 	<link rel="shortcut icon" href="/favicon.ico" />
-
-   <!--- ${jsScriptIncludes:start} --->
-   <script src="/resources/js/jquery/jquery-1.7.1.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-transition.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-alert.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-modal.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-dropdown.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-scrollspy.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-tab.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-tooltip.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-popover.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-button.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-collapse.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-carousel.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap-typeahead.js"></script>
-	<script src="/resources/js/jquery/blockui.js"></script>
-
-	<script src="/resources/js/BootstrapPlus.js"></script>
-	<script src="/resources/js/YAOF.min.js"></script>
-	<!--- ${jsScriptIncludes:end} --->
 </head>
 
 <body>
@@ -96,6 +79,29 @@
 		</footer>
 	</div> <!-- /.fluid-container -->
     
+   <!--- @jsScriptIncludes@ --->
+   <script src="/resources/js/jquery-1.7.1.js"></script>
+	<script src="/resources/js/bootstrap-transition.js"></script>
+	<script src="/resources/js/bootstrap-alert.js"></script>
+	<script src="/resources/js/bootstrap-modal.js"></script>
+	<script src="/resources/js/bootstrap-dropdown.js"></script>
+	<script src="/resources/js/bootstrap-scrollspy.js"></script>
+	<script src="/resources/js/bootstrap-tab.js"></script>
+	<script src="/resources/js/bootstrap-tooltip.js"></script>
+	<script src="/resources/js/bootstrap-popover.js"></script>
+	<script src="/resources/js/bootstrap-button.js"></script>
+	<script src="/resources/js/bootstrap-collapse.js"></script>
+	<script src="/resources/js/bootstrap-carousel.js"></script>
+	<script src="/resources/js/bootstrap-typeahead.js"></script>
+	<script src="/resources/js/blockui.js"></script>
+
+	<script src="/resources/js/BootstrapPlus.js"></script>
+	<script src="/resources/js/YAOF.min.js"></script>
 	<script src="/resources/js/codedayspa.js"></script>
+	<!--- @jsScriptIncludes@ --->
+
+	<cfif structKeyExists(rc, "js")>
+		<script type="text/javascript">#rc.js#</script>
+	</cfif>
 <body>
 </html></cfoutput>

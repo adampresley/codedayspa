@@ -34,16 +34,14 @@
 		<br style="margin-bottom: 2in;"></br>
 	</div>
 
-	<script>
+	<cfsavecontent variable="rc.js">
 
 		var page = null;
 
-		(function($) {
-			$(document).ready(function() {
-				page = new CodeDaySpa.BeautifyJsonPage();
-			});
-		})(jQuery);
+		$(document).ready(function() {
+			page = new CodeDaySpa.BeautifyJsonPage();
+		});
 
-	</script>
+	</cfsavecontent>
 
 </cfoutput>

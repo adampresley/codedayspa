@@ -24,3 +24,4 @@ server/mongodb/log/mongodb*
 # Ignore WAR deployment files
 #
 deploy/*.war
+working/**
