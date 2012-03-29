@@ -89,6 +89,10 @@
 
 		<footer>
 			<p>&copy; #dateFormat(now(), "yyyy")# Adam Presley</p>
+			<p>This project is open source with code hosted on <a href="https://github.com/adampresley/codedayspa" target="_blank">GitHub.com</a>.</p>
+			<p>
+				Hosted using <a href="http://jelastic.com/" target="_blank">Jelastic</a> <em>"Java in the Cloud"</em> hosting. Run on <a href="http://tomcat.apache.org" target="_blank">Tomcat 7</a>, Java 6, and 
+				<a href="http://openbd.org" target="_blank">OpenBD</a>.
 		</footer>
 	</div> <!-- /.fluid-container -->
     
