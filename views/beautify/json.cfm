@@ -7,7 +7,7 @@
 		<strong>Beautify!</strong> button.
 	</p>
 
-	<textarea name="jsonString" id="jsonString" class="span8" rows="10">[{test:1,firstname:"Adam",lastname:"Presley"},{test:1,firstname:"Maryanne",lastname:"Presley"}]</textarea>
+	<textarea name="jsonString" id="jsonString" class="span8" rows="10">[{"test":1,"firstname":"Adam","lastname":"Presley"},{"test":2,"firstname":"Maryanne","lastname":"Presley"}]</textarea>
 
 	<div class="clear"></div>
 	<br />
