@@ -7,7 +7,8 @@
 	
 	<cfset variables.frameworkSettings.reloadFrameworkEveryRequest = false />
 	<cfset variables.frameworkSettings.flushBufferBeforeOutput = true />
-
+	<cfset variables.frameworkSettings.removeIndexCfm = true />
+	
 	<!---
 		Register MongoDB
 	<cfset application.dbName = "codedayspa" />

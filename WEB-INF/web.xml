@@ -24,6 +24,19 @@
         <filter-name>SearchEngineFriendlyURLFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+        <init-param>
+            <param-name>logLevel</param-name>
+            <param-value>WARN</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <servlet-name>cfmServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
        <servlet-name>H2Console</servlet-name>
        <servlet-class>org.h2.server.web.WebServlet</servlet-class>
@@ -68,6 +81,7 @@
 			<url-pattern>*.cfres</url-pattern>
 		</servlet-mapping>
     <servlet-mapping><servlet-name>cfmServlet</servlet-name><url-pattern>*.cfm</url-pattern></servlet-mapping><servlet-mapping><servlet-name>cfmServlet</servlet-name><url-pattern>*.cfml</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>cfmServlet</servlet-name><url-pattern>/index.cfm/*</url-pattern></servlet-mapping>
     <servlet-mapping>
         <servlet-name>cfcServlet</servlet-name>
         <url-pattern>*.cfc</url-pattern>
