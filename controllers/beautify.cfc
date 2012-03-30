@@ -8,4 +8,8 @@
 		<cfset rc.title = "Beautify WSDL" />
 	</cffunction>
 
+	<cffunction name="sql" output="false">
+		<cfset rc.title = "Beautify SQL" />
+	</cffunction>
+	
 </cfcomponent>

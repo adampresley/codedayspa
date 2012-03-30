@@ -47,4 +47,14 @@
 	</cffunction>
 
 
+	<cffunction name="sqlStringToHtml" output="false">
+		<cfargument name="input" type="string" required="true" />
+
+		<cfset var formatter = createObject("java", "blanco.commons.sql.format.BlancoSqlFormatter").init(
+			createObject("java", "blanco.commons.sql.format.BlancoSqlRule").init()
+		) />
+
+		<cfreturn htmlCodeFormat(formatter.format(arguments.input)) />
+	</cffunction>
+	
 </cfcomponent>

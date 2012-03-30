@@ -216,3 +216,62 @@ CodeDaySpa.BeautifyWsdlPage = function(config) {
 	__init();
 };
 YAOF.attach(CodeDaySpa.BeautifyWsdlPage);
+
+
+CodeDaySpa.BeautifySqlPage = function(config) {
+	var
+		__init = function() {
+			$("#btnParse").on("click", __parse);
+			$("#btnClear").on("click", __clear);
+
+			$("#sqlString").focus()
+		},
+
+		__parse = function() {
+			if ($.trim($("#sqlString").val()) === "") {
+				new BootstrapPlus.Modal({
+					header: "Error",
+					body: "<p>You must provide *some* SQL...</p>"
+				});
+				return;
+			}
+
+			CodeDaySpa.block("Beautifying SQL...");
+
+			CodeDaySpa.ajax({
+				data: {
+					action: "beautify.sql",
+					sqlString: $("#sqlString").val()
+				},
+				success: __onParseSuccess,
+				error: __onParseError
+			});
+		},
+
+		__onParseSuccess = function(response) {
+			$("#results").html(response.output);
+			$("#resultsContainer").show();
+
+			$("html, body").animate({ scrollTop: $("#results").offset().top - 75 }, 1000);
+			CodeDaySpa.unblock();
+		},
+
+		__onParseError = function(xhr) {
+			CodeDaySpa.showAjaxError(xhr);
+		},
+
+		__clear = function() {
+			$("#resultsContainer").fadeOut("slow", function() {
+				$("#results").html("");
+				$("html, body").animate({
+					scrollTop: $("#instructions").offset().top
+				}, 1000);
+			});
+		},
+
+		__this = this,
+		__config = $.extend(config, {});
+
+	__init();	
+};
+YAOF.attach(CodeDaySpa.BeautifySqlPage);

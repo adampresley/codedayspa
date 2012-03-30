@@ -44,6 +44,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="#buildUrl('beautify.json')#">JSON</a></li>
 								<li><a href="#buildUrl('beautify.wsdl')#">WSDL</a></li>
+								<li><a href="#buildUrl('beautify.sql')#">SQL</a></li>
 							</ul>
 						</li>
 						<li class="dropdown <cfif request.context.section EQ 'lounge'> active</cfif>" id="loungeMenu">

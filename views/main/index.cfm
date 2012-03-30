@@ -22,6 +22,7 @@
 		<ul>
 			<li><a href="#buildUrl('beautify.json')#">Beautify JSON</a></li>
 			<li><a href="#buildUrl('beautify.wsdl')#">Beautify WSDL</a></li>
+			<li><a href="#buildUrl('beautify.sql')#">Beautify SQL</a></li>
 		</ul>
 	</section>
 
@@ -35,5 +36,5 @@
 	</section>
 
 	<div class="clear"></div>
-	
+
 </cfoutput>
