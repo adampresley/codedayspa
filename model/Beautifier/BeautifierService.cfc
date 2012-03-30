@@ -5,6 +5,7 @@
 
 		<cfset var JSON = "" />
 		<cfset var serializer = "" />
+		<cfset var result = "" />
 
 		<cfif trim(left(arguments.input, 1)) EQ "[">
 			<cfset JSON = createObject("java", "net.sf.json.JSONArray") />
@@ -13,7 +14,11 @@
 		</cfif>
 
 		<cfset serializer = JSON.fromObject(arguments.input) />
-		<cfreturn htmlCodeFormat(serializer.toString(3, 0)) />
+
+		<cfset result = htmlCodeFormat(serializer.toString(3, 0)) />
+		<cfset result = reReplaceNoCase(result, "<pre\s*>", "<pre class=""prettyprint lang-js"">", "ALL") />
+
+		<cfreturn result />
 	</cffunction>
 
 
@@ -54,7 +59,9 @@
 			createObject("java", "blanco.commons.sql.format.BlancoSqlRule").init()
 		) />
 
-		<cfreturn htmlCodeFormat(formatter.format(arguments.input)) />
+		<cfset var result = htmlCodeFormat(formatter.format(arguments.input)) />
+		<cfset result = reReplaceNoCase(result, "<pre\s*>", "<pre class=""prettyprint lang-sql"">", "ALL") />
+		<cfreturn result />
 	</cffunction>
 	
 </cfcomponent>

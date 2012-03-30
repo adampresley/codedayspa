@@ -11,6 +11,7 @@
 	<!--- @cssIncludes@ --->
 	<link rel="stylesheet" type="text/css" href="/resources/css/cerulean.min.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/bootstrap-responsive.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/prettify.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/codedayspa.css" />
 	<!--- @cssIncludes@ --->
 
@@ -95,6 +96,8 @@
 	<script src="/resources/js/bootstrap-carousel.js"></script>
 	<script src="/resources/js/bootstrap-typeahead.js"></script>
 	<script src="/resources/js/blockui.js"></script>
+	<script src="/resources/js/prettify.js"></script>
+	<script src="/resources/js/lang-sql.js"></script>
 
 	<script src="/resources/js/BootstrapPlus.js"></script>
 	<script src="/resources/js/YAOF.min.js"></script>

@@ -132,6 +132,8 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 			}
 
 			$("#results").html(rendered);
+			window.prettyPrint();
+			
 			$("#resultsContainer").show();
 
 			$("html, body").animate({ scrollTop: $("#results").offset().top - 75 }, 1000);
@@ -250,6 +252,8 @@ CodeDaySpa.BeautifySqlPage = function(config) {
 
 		__onParseSuccess = function(response) {
 			$("#results").html(response.output);
+			window.prettyPrint();
+
 			$("#resultsContainer").show();
 
 			$("html, body").animate({ scrollTop: $("#results").offset().top - 75 }, 1000);

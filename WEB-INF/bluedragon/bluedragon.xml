@@ -18,9 +18,9 @@
     <legacyformvalidation>false</legacyformvalidation>
     <nativelibdir>/WEB-INF/bin</nativelibdir>
     <errorhandler></errorhandler>
-    <lastupdated>30/Mar/2012 09:56.11</lastupdated>
-    <whitespacecomp>false</whitespacecomp>
+    <lastupdated>30/Mar/2012 11:39.48</lastupdated>
     <allowedips></allowedips>
+    <whitespacecomp>false</whitespacecomp>
   </system>
   <file>
     <maxfiles>1000</maxfiles>
@@ -40,8 +40,8 @@
       <function>ProcessTagRequest</function>
       <keeploaded>true</keeploaded>
       <name>cfx_nativebluedragonhello</name>
-      <module>/WEB-INF/customtags/BlueDragonHello.dll</module>
       <displayname>CFX_NativeBlueDragonHello</displayname>
+      <module>/WEB-INF/customtags/BlueDragonHello.dll</module>
       <description>A simple C++ CFX tag example</description>
     </mapping>
   </nativecustomtags>
@@ -53,11 +53,11 @@
     <slowlog>-1</slowlog>
   </cfquery>
   <debugoutput>
-    <enabled>false</enabled>
     <executiontimes>
       <show>false</show>
       <highlight>250</highlight>
     </executiontimes>
+    <enabled>false</enabled>
     <exceptions>
       <show>false</show>
     </exceptions>
@@ -67,9 +67,6 @@
     <database>
       <show>false</show>
     </database>
-    <timer>
-      <show>false</show>
-    </timer>
     <variables>
       <url>true</url>
       <form>true</form>
@@ -78,30 +75,33 @@
       <client>true</client>
       <server>true</server>
       <request>true</request>
-      <session>true</session>
       <application>true</application>
+      <session>true</session>
       <local>true</local>
       <cffile>true</cffile>
       <show>true</show>
       <variables>false</variables>
     </variables>
+    <timer>
+      <show>false</show>
+    </timer>
   </debugoutput>
-  <cfapplication>
-    <enabled>true</enabled>
-    <clientstorage>cookie</clientstorage>
-    <sessiontimeout>#CreateTimeSpan(0,0,20,0)#</sessiontimeout>
-    <applicationtimeout>#CreateTimeSpan(2,0,0,0)#</applicationtimeout>
-    <j2eesession>false</j2eesession>
-  </cfapplication>
   <openbdadminapi>
     <version>2.0</version>
     <lastupdated>27/Mar/2012 23:34:04</lastupdated>
   </openbdadminapi>
+  <cfapplication>
+    <clientstorage>cookie</clientstorage>
+    <enabled>true</enabled>
+    <sessiontimeout>#CreateTimeSpan(0,0,20,0)#</sessiontimeout>
+    <applicationtimeout>#CreateTimeSpan(2,0,0,0)#</applicationtimeout>
+    <j2eesession>false</j2eesession>
+  </cfapplication>
   <cfmail>
     <interval>240</interval>
     <smtpserver>127.0.0.1</smtpserver>
-    <charset>UTF-8</charset>
     <smtpport>25</smtpport>
+    <charset>UTF-8</charset>
   </cfmail>
   <cfmlcustomtags>
     <mapping name="cf">
