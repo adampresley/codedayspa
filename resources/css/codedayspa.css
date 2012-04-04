@@ -1,10 +1,13 @@
 body { padding-top: 75px; padding-bottom: 40px; }
+legend { margin-bottom: 15px; }
 
 /*
  * Margin and padding styles
  */
 .margin-left-25 { margin-left: 25px; }
 .margin-bottom-25 { margin-bottom: 25px; }
+.margin-top-15 { margin-top: 15px; }
+.padding-top-15 { margin-top: 15px; }
 
 .inner-blur-shadow {
 	-moz-box-shadow:  0 0 15px #888;

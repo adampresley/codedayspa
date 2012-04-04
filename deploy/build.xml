@@ -117,6 +117,8 @@
 			<fileset dir="${js.dir}" includes="bootstrap-carousel.js" />
 			<fileset dir="${js.dir}" includes="bootstrap-typeahead.js" />
 			<fileset dir="${js.dir}" includes="blockui.js" />
+			<fileset dir="${js.dir}" includes="prettify.js" />
+			<fileset dir="${js.dir}" includes="lang-sql.js" />
 			<fileset dir="${js.dir}" includes="BootstrapPlus.js" />
 			<fileset dir="${js.dir}" includes="YAOF.min.js" />
 			<fileset dir="${js.dir}" includes="codedayspa.js" />
@@ -127,6 +129,7 @@
 		<concat destfile="${working.dir}/resources/css/temp.css">
 			<fileset dir="${css.dir}" includes="cerulean.min.css" />
 			<fileset dir="${css.dir}" includes="bootstrap-responsive.css" />
+			<fileset dir="${css.dir}" includes="prettify.css" />
 			<fileset dir="${css.dir}" includes="codedayspa.css" />
 		</concat>
 	</target>
