@@ -34,7 +34,6 @@
 		
 		<cfset init() />
 
-
 		<cftry>
 			<cfset validateAccess() />
 			<cfset result = __validateAction() />
@@ -82,6 +81,7 @@
 			
 	</cffunction>	
 	
+
 	<!---
 		Function: onAjaxError
 		Called in the event there is an error while processing the AJAX request.
@@ -89,7 +89,9 @@
 	--->
 	<cffunction name="onAjaxError" access="private" output="false">
 		<cfargument name="errorInfo" />
+
 	</cffunction>
+
 
 	<cffunction name="__validateAction" access="private" output="false">
 		<cfset var rc = request.rc />

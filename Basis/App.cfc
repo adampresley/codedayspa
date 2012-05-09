@@ -44,7 +44,7 @@
 
 		<cfif variables.frameworkSettings.reloadFrameworkEveryRequest || structKeyExists(url, variables.frameworkSettings.urlReloadVariableName)>
 			<cfif !len(variables.frameworkSettings.urlReloadPassword) || (len(variables.frameworkSettings.urlReloadPassword) && structKeyExists(url, variables.frameworkSettings.urlReloadPasswordVariableName) && variables.frameworkSettings.urlReloadPassword EQ url[variables.frameworkSettings.urlReloadPasswordVariableName])>
-			<cfset onApplicationStart() />
+				<cfset onApplicationStart() />
 			</cfif>
 		</cfif>
 
@@ -144,7 +144,11 @@
 			<cfif listLen(arguments.path, ".") LT 1>
 				<cfset temp &= defaultAction />
 			<cfelse>
-				<cfset temp &= ".#variables.frameworkSettings.defaultAction#" />
+				<cfif find(".", temp) EQ 1>
+					<cfset temp = listGetAt(request.rc.action, 1, ".") & temp />
+				<cfelse>
+					<cfset temp &= ".#variables.frameworkSettings.defaultAction#" />
+				</cfif>
 			</cfif>
 		</cfif>
 		
