@@ -8,7 +8,7 @@
     <assert>false</assert>
     <missingtemplatehandler></missingtemplatehandler>
     <tempdirectory>/WEB-INF/bluedragon/work/temp</tempdirectory>
-    <lastfile>c:\code\codedayspa\server\tomcat\webapps\..\..\..\WEB-INF\bluedragon\bluedragon.xml.bak.1</lastfile>
+    <lastfile>C:\Users\APRESLEY\Documents\GitHub\codedayspa\server\tomcat\webapps\..\..\..\WEB-INF\bluedragon\bluedragon.xml.bak.1</lastfile>
     <runtimelogging>true</runtimelogging>
     <deniedips></deniedips>
     <defaultcharset>utf-8</defaultcharset>
@@ -18,7 +18,7 @@
     <legacyformvalidation>false</legacyformvalidation>
     <nativelibdir>/WEB-INF/bin</nativelibdir>
     <errorhandler></errorhandler>
-    <lastupdated>30/Mar/2012 11:39.48</lastupdated>
+    <lastupdated>10/Jan/2013 11:26.23</lastupdated>
     <allowedips></allowedips>
     <whitespacecomp>false</whitespacecomp>
   </system>
