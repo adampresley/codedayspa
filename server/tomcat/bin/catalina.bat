@@ -100,7 +100,7 @@ rem ---------------------------------------------------------------------------
 rem
 rem Java options
 rem
-set JAVA_OPTS=-server -Xms256m -Xmx768m -XX:PermSize=64m -XX:MaxPermSize=96m
+set JAVA_OPTS=-server -Xms128m -Xmx256m -XX:PermSize=32m -XX:MaxPermSize=96m
 
 
 
