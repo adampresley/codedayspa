@@ -3,6 +3,10 @@ Code Day Spa
 
 A spa day for your JSON, web services, and REST services. Beautify!
 
+## Contributors
+* Adam Presley
+
+
 ## License
 Code Day Spa Copyright (C) 2012 Adam Presley
 
