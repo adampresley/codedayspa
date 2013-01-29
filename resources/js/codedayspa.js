@@ -46,6 +46,17 @@ CodeDaySpa = {
 				body: "<p>" + parsed.message + "</p>"
 			});
 		}
+	},
+
+	error: function(message, header) {
+		CodeDaySpa.unblock();
+		new BootstrapPlus.Modal({
+			header: header || "Notice",
+			body: "<p>" + message + "</p>",
+			events: {
+				hidden: function() { $("#jsonString").focus(); }
+			}
+		});
 	}
 };
 
@@ -100,7 +111,7 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 				try {
 					data = $.parseJSON(data);
 
-					if (data.length > 0) {
+					if (data.hasOwnProperty("length") && data.length > 0) {
 						rendered = '<table class="table table-striped table-bordered table-condensed"><thead><tr>';
 
 						for (item in data[0]) {
@@ -120,6 +131,8 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 						}
 
 						rendered += '</tbody></table>';
+					} else {
+						CodeDaySpa.error("To show results as a grid the JSON data must start with an Array object.");
 					}
 				}
 				catch (e) {
