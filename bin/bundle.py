@@ -2,7 +2,14 @@ import os, re, shutil
 
 COMPRESSOR = "yuicompressor-2.4.7.jar"
 
-
+#
+# Function: compress
+# Takes a series of CSS or JS files, combines them into a single temp file,
+# then minifies it.
+#
+# Author:
+#    Adam Presley
+#
 def compress(inFiles, outFile, type = "js", verbose = False, tempFile = ".temp"):
 	temp = open(tempFile, "w")
 
@@ -24,6 +31,14 @@ def compress(inFiles, outFile, type = "js", verbose = False, tempFile = ".temp")
 	os.system('java -jar "%s" %s "%s"' % (COMPRESSOR, " ".join(options), tempFile))
 	os.remove(tempFile)
 
+#
+# Function: getCssFileList
+# Reads a layout/template file, looks for specific CSS markers, and
+# returns an array of relative paths for each file reference found.
+#
+# Author: 
+#    Adam Presley
+#
 def getCssFileList(templateFile):
 	fp = open(templateFile, "r")
 	raw = fp.read()
@@ -38,6 +53,14 @@ def getCssFileList(templateFile):
 
 	return matches
 
+#
+# Function: getJsFileList
+# Reads a layout/template file, looks for specific JS markers, and
+# returns an array of relative paths for each file reference found.
+#
+# Author: 
+#    Adam Presley
+#
 def getJsFileList(templateFile):
 	fp = open(templateFile, "r")
 	raw = fp.read()
@@ -52,6 +75,15 @@ def getJsFileList(templateFile):
 
 	return matches
 
+#
+# Function: updateLayoutFile
+# Reads a layout/template file, looks for specific CSS and JS markers, then
+# replaces the contents between those markers with a new CSS or JS include
+# to newly combined and minified files.
+#
+# Author: 
+#    Adam Presley
+#
 def updateLayoutFile(templateFile):
 	fp = open(templateFile, "r")
 	raw = fp.read()
@@ -68,6 +100,12 @@ def updateLayoutFile(templateFile):
 	fp.close()
 
 
+
+#
+# Main program. This will iterate over a list of layout files,
+# bundle and minify the CSS and JavaScript, then replace
+# the references to them in the layout file.
+#
 if __name__ == "__main__":
 	layoutFiles = ("../layouts/default.cfm",)
 
@@ -81,4 +119,3 @@ if __name__ == "__main__":
 		compress(getJsFileList(layoutFile), "../resources/js/all.js", type = "js")
 
 		updateLayoutFile(layoutFile)
-		
