@@ -10,7 +10,7 @@
 #    * Environment variables for boto: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
 #    
 # To run:
-#    fab amazon production updateService -i /path/to/keyfile
+#    fab amazon production updateServers -i /path/to/keyfile
 #
 from __future__ import with_statement
 
