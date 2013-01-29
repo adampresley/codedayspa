@@ -13,15 +13,16 @@ server/tomcat/work/**
 
 
 #
-# Ignore MongoDB journals, locks and logs
-#
-data/codedayspa.*
-data/journal/**
-data/mongod.lock
-server/mongodb/log/mongodb*
-
-#
 # Ignore WAR deployment files
 #
 deploy/*.war
 working/**
+
+
+#
+# Ignore combined/minified files
+#
+resources/css/all.css
+resources/js/all.js
+
+*.pyc
