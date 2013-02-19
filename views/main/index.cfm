@@ -37,4 +37,7 @@
 
 	<div class="clear"></div>
 
+	<div class="alert alert-error">
+		Hello presentation group!
+	</div>
 </cfoutput>
