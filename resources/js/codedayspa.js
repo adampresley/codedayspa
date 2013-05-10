@@ -292,3 +292,109 @@ CodeDaySpa.BeautifySqlPage = function(config) {
 	__init();	
 };
 YAOF.attach(CodeDaySpa.BeautifySqlPage);
+
+
+CodeDaySpa.CompressJavaScriptPage = function(config) {
+	var
+		__init = function() {
+			$("#btnParse").on("click", __parse);
+			$("#btnClear").on("click", __clear);
+
+			$("#jsString").focus()
+		},
+
+		__parse = function() {
+			if ($.trim($("#jsonString").val()) === "") {
+				new BootstrapPlus.Modal({
+					header: "Error",
+					body: "<p>You must provide *some* JavaScript...</p>"
+				});
+				return;
+			}
+
+			CodeDaySpa.block("Compression therapy in progress...");
+
+			CodeDaySpa.ajax({
+				data: {
+					action: "compression.javascript",
+					jsonString: $("#jsString").val()
+				},
+				success: __onParseSuccess,
+				error: __onParseError
+			});
+		},
+
+		__onParseSuccess = function(response) {
+			var 
+				data = response.output,
+				rendered = null,
+				item = null,
+				index = 0,
+				parsed = [],
+				e;
+			
+			if ($("#chkGridResults").attr("checked")) {
+				try {
+					data = $.parseJSON(data);
+
+					if (data.hasOwnProperty("length") && data.length > 0) {
+						rendered = '<table class="table table-striped table-bordered table-condensed"><thead><tr>';
+
+						for (item in data[0]) {
+							rendered += '<th>' + item + "</th>";
+						}
+
+						rendered += '</tr></thead><tbody>';
+
+						for (index = 0; index < data.length; index++) {
+							rendered += '<tr>';
+
+							for (item in data[index]) {
+								rendered += '<td>' + data[index][item] + '</td>';
+							}
+
+							rendered += '</tr>';
+						}
+
+						rendered += '</tbody></table>';
+					} else {
+						CodeDaySpa.error("To show results as a grid the JSON data must start with an Array object.");
+					}
+				}
+				catch (e) {
+					CodeDaySpa.showAjaxError({ responseText: "{ \"message\": \"There was a problem Beautifying your JSON. Perhaps a syntax/validation issue?\" }" });
+					rendered = "<p>No results to beautify. Did you make sure that your data was an array?</p>";
+				}
+			}
+			else {
+				rendered = data;
+			}
+
+			$("#results").html(rendered);
+			window.prettyPrint();
+			
+			$("#resultsContainer").show();
+
+			$("html, body").animate({ scrollTop: $("#results").offset().top - 75 }, 1000);
+			CodeDaySpa.unblock();
+		},
+
+		__onParseError = function(xhr) {
+			CodeDaySpa.showAjaxError(xhr);
+		},
+
+		__clear = function() {
+			$("#resultsContainer").fadeOut("slow", function() {
+				$("#results").html("");
+				$("html, body").animate({
+					scrollTop: $("#instructions").offset().top
+				}, 1000);
+			});
+		},
+
+		__this = this,
+		__config = $.extend(config, {});
+
+	__init();
+};
+YAOF.attach(CodeDaySpa.CompressJavaScriptPage);

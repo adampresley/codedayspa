@@ -48,6 +48,12 @@
 								<li><a href="#buildUrl('beautify.sql')#">SQL</a></li>
 							</ul>
 						</li>
+						<li class="dropdown <cfif request.context.section EQ 'compression'> active</cfif>" id="compressionMenu">
+							<a href="##compressionMenu" class="dropdown-toggle" data-toggle="dropdown">Compression Therapy <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#buildUrl('compression.javascript')#">Minify JavaScript</a></li>
+							</ul>
+						</li>
 						<li class="dropdown <cfif request.context.section EQ 'lounge'> active</cfif>" id="loungeMenu">
 							<a href="##loungeMenu" class="dropdown-toggle" data-toggle="dropdown">SOA Lounge <b class="caret"></b></a>
 							<ul class="dropdown-menu">

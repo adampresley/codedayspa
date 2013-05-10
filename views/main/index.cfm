@@ -16,7 +16,7 @@
 		</p>
 	</section>	
 
-	<section class="margin-bottom-25 pull-left" style="width: 25%;">
+	<section class="margin-bottom-25 pull-left" style="width: 15%;">
 		<h3>Beautify</h3>
 
 		<ul>
@@ -26,7 +26,15 @@
 		</ul>
 	</section>
 
-	<section class="margin-bottom-25 pull-left" style="width: 25%;">
+	<section class="margin-bottom-25 pull-left" style="width: 20%;">
+		<h3>Compression Therapy</h3>
+
+		<ul>
+			<li><a href="#buildUrl('compression.javascript')#">Minify JavaScript</a></li>
+		</ul>
+	</section>
+
+	<section class="margin-bottom-25 pull-left" style="width: 15%;">
 		<h3>Lounge</h3>
 
 		<ul>
