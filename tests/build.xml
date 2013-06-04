@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="CodeDaySpa Test Runner" basedir="." default="runUnitTests">
+	<!--
+	 Jenkins / Hudson Tips:
+	 
+	 If you stick with the defaults configured in "init", use the following as a guide for populating the Jenkins job configuration for this project
+	 
+	 1) "Test  Report XMLs" configuration will be something like 
+	 
+	 	DirectoryNameOfYourProject/test/testresults/xml/**/*.xml
+	 	
+	 2) "Archive the artifacts" configuration will be something like
+	 	
+	 	DirectoryNameOfYourProject/deploy/*.zip
+	-->
+	
+	<target name="init">
+		<!-- ////////   DIRECTORY AND CFC PATH SETUP (used in all targets) -->
+		<property name="application.name" value="codedayspa" />
+		<property name="test.dir.name" value="tests" />
+		<property name="test.dir.location" location="." />
+		<property name="test.cfcpath" value="${test.dir.name}" />
+
+		<!-- ////////   MXUNIT ANT TASK SETUP (used in runtests and junitreport targets) -->
+		<property name="test.server" value="localhost" />
+		<property name="test.serverport" value="8091" />
+		<property name="test.runner" value="/${test.dir.name}/HttpAntRunner.cfc" />
+		
+		<!-- this is where the xml and html will live for the report generator and Jenkins -->
+		<property name="test.output" location="testresults" />
+		<property name="test.output.xml" location="${test.output}/xml" />
+		<property name="test.junitoutput" location="${test.output}/html" />
+
+
+		<!-- ////////   JAR FILES WE NEED FOR EXTERNAL TASKS -->
+		<path id="project.classpath">
+			<fileset dir="lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+		
+		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath" />
+
+		<echoproperties prefix="test" />
+		<echoproperties prefix="dist" />
+	</target>
+
+	<target name="clean" depends="init">
+		<mkdir dir="${test.output.xml}" />
+		<mkdir dir="${test.junitoutput}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+
+	<target name="runUnitTests" depends="init">
+		<mkdir dir="${test.output.xml}/unit" />
+		<runTestDirectory directoryName="" excludes=""/>
+	</target>
+	
+	<macrodef name="runTestDirectory">
+		<attribute name="directoryName"/>
+		<attribute name="excludes" default=""/>
+		<sequential>
+			<mxunittask server="${test.server}" port="${test.serverport}" defaultrunner="${test.runner}" outputdir="${test.output.xml}/@{directoryName}" verbose="true" failureproperty="tests.bombed" errorproperty="tests.bombed">
+				<directory path="${test.dir.location}/@{directoryName}" recurse="true" packageName="${test.cfcpath}.@{directoryName}" componentPath="${test.cfcpath}.@{directoryName}" excludes="@{excludes}" />
+			</mxunittask>
+		</sequential>
+	</macrodef>
+
+</project>

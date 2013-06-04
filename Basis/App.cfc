@@ -28,6 +28,7 @@
 
 
 	<cffunction name="onApplicationStart" output="false">
+		<cfset application.frameworkSettings = duplicate(variables.frameworkSettings) />
 		<cfset application.theFactory = createObject("component", "TheFactory").init(variables.frameworkSettings) />
 		<cfset application.systemDelimiter = createObject("java", "java.lang.System").getProperty("file.separator").charAt(0) />
 		<cfset __loadPlugins() />
@@ -285,18 +286,23 @@
 		<cfset var instance = "" />
 		<cfset var rc = request.rc />
 		
-		<cfinvoke component="#variables.frameworkSettings.controllerPath#.#request.context.section#" method="init" returnvariable="instance" rc="#request.rc#" buildUrl="#buildUrl#" frameworkSettings="#variables.frameworkSettings#">
-		
-		<cfif !structKeyExists(instance, request.context.method)>
-			<cfthrow type="InvalidAction" message="Invalid action" detail="The requested action #rc.action# is invalid." />
-		</cfif>
-		
-		<cfinvoke component="#instance#" method="#request.context.method#">
-		
- 		<cfsavecontent variable="body"><cfoutput><cfinclude template="/#variables.frameworkSettings.viewPath#/#lCase(request.context.section)#/#lCase(request.context.method)#.cfm" /></cfoutput></cfsavecontent>
-		<cfif request.doLayout>
-			<cfif variables.frameworkSettings.flushBufferBeforeOutput><cfset getPageContext().getOut().clear() /></cfif>
-			<cfinclude template="/#variables.frameworkSettings.layoutPath#/#request.layoutName#.cfm" />
+		<cfif rc.action NEQ "">
+			<cfinclude template="/Basis/TheFactory.cfm" />
+			<cfinclude template="/#variables.frameworkSettings.controllerPath#/#request.context.section#.cfm" />
+
+			<!---
+			<cfif !structKeyExists(instance, request.context.method)>
+				<cfthrow type="InvalidAction" message="Invalid action" detail="The requested action #rc.action# is invalid." />
+			</cfif>
+			--->
+
+			<cfset evaluate("#request.context.method#()") />
+
+	 		<cfsavecontent variable="body"><cfoutput><cfinclude template="/#variables.frameworkSettings.viewPath#/#lCase(request.context.section)#/#lCase(request.context.method)#.cfm" /></cfoutput></cfsavecontent>
+			<cfif request.doLayout>
+				<cfif variables.frameworkSettings.flushBufferBeforeOutput><cfset getPageContext().getOut().clear() /></cfif>
+				<cfinclude template="/#variables.frameworkSettings.layoutPath#/#request.layoutName#.cfm" />
+			</cfif>
 		</cfif>
 	</cffunction>
 

@@ -11,7 +11,8 @@
 		<note>
 			Rewrite to remove index.cfm
 		</note>
-		<from>^/(?!resources|bluedragon|ajaxProxy)(.*)$</from>
+        <from>^/(?!resources|bluedragon|ajaxProxy|favicon|mxunit|tests)(.*)$</from>
+		<from>^/(.*)cfm$</from>
 		<to>/index.cfm/$1</to>
 	</rule>
 
