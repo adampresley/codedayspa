@@ -187,6 +187,8 @@ def amazon():
 #    Adam Presley
 #
 def updateServers():
+	"""Resets and pulls latest code from origin remote. e.g. fab amazon production updateServers -i /path/to/keyfile"""
+	
 	require("hosts", provided_by = [ amazon ])
 	require("environmentName", provided_by = [ production, test ])
 
