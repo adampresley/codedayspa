@@ -8,6 +8,7 @@
 #    * boto
 #    * pycrypto (Windows: http://www.voidspace.org.uk/python/modules.shtml#pycrypto)
 #    * Environment variables for boto: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+#       * On Ubuntu you can set these in your profile at ~/.bashrc
 #    
 # To run:
 #    fab amazon production updateServers -i /path/to/keyfile
