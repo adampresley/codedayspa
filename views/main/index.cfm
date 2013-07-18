@@ -47,7 +47,4 @@
 
 	<div class="clear"></div>
 
-	<p>
-		Hello Houston CFUG
-	</p>
 </cfoutput>
