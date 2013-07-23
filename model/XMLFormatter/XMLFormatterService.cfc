@@ -14,8 +14,9 @@
 
 		<cfset transformer.setOutputProperty("indent", "yes") />
 		<cfset transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "3") />
-		<cfset transformer.transform(stream, xmlOutput) />
+		<cfset transformer.setOutputProperty("omit-xml-declaration", "yes") />
 
+		<cfset transformer.transform(stream, xmlOutput) />
 		<cfreturn xmlOutput.getWriter().toString() />
 	</cffunction>
 
