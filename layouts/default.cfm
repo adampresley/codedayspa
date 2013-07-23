@@ -15,7 +15,6 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/codedayspa.css" />
 	<!---CSS-END--->
 
-	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 		<script src="/resources/js/html5.js"></script>
 	<![endif]-->
@@ -44,6 +43,7 @@
 							<a href="##beautifyMenu" class="dropdown-toggle" data-toggle="dropdown">Beautify <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#buildUrl('beautify.json')#">JSON</a></li>
+								<li><a href="#buildUrl('beautify.xml')#">XML</a></li>
 								<li><a href="#buildUrl('beautify.wsdl')#">WSDL</a></li>
 								<li><a href="#buildUrl('beautify.sql')#">SQL</a></li>
 							</ul>

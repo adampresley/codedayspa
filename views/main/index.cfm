@@ -21,6 +21,7 @@
 
 		<ul>
 			<li><a href="#buildUrl('beautify.json')#">Beautify JSON</a></li>
+			<li><a href="#buildUrl('beautify.xml')#">Beautify XML</a></li>
 			<li><a href="#buildUrl('beautify.wsdl')#">Beautify WSDL</a></li>
 			<li><a href="#buildUrl('beautify.sql')#">Beautify SQL</a></li>
 		</ul>

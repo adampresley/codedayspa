@@ -11,5 +11,9 @@
 	<cffunction name="sql" output="false">
 		<cfset rc.title = "Beautify SQL" />
 	</cffunction>
-	
+
+	<cffunction name="xml" output="false">
+		<cfset rc.title = "Beautify XML" />
+	</cffunction>
+
 </cfcomponent>

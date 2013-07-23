@@ -64,4 +64,15 @@
 		<cfreturn result />
 	</cffunction>
 	
+
+	<cffunction name="xmlStringToHtml" output="false">
+		<cfargument name="input" type="string" required="true" />
+
+		<cfset var formatter = application.theFactory.getService("XMLFormatter") />
+		<cfset var result = htmlCodeFormat(formatter.xmlStringToHtml(arguments.input)) />
+
+		<cfset result = reReplaceNoCase(result, "<pre\s*>", "<pre class=""prettyprint lang-xml"">", "ALL") />
+		<cfreturn result />
+	</cffunction>
+
 </cfcomponent>

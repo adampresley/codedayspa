@@ -40,8 +40,8 @@ CodeDaySpa = {
 
 		CodeDaySpa.unblock();
 
-		if (parsed !== null && parsed !== undefined && "message" in parsed) {
-			new BootstrapPlus.Modal({
+		if (parsed !== null && parsed !== undefined && parsed.hasOwnProperty("message")) {
+			BootstrapPlus.Modal({
 				header: "Error",
 				body: "<p>" + parsed.message + "</p>"
 			});
@@ -50,7 +50,7 @@ CodeDaySpa = {
 
 	error: function(message, header) {
 		CodeDaySpa.unblock();
-		new BootstrapPlus.Modal({
+		BootstrapPlus.Modal({
 			header: header || "Notice",
 			body: "<p>" + message + "</p>",
 			events: {
@@ -67,12 +67,12 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 			$("#btnParse").on("click", __parse);
 			$("#btnClear").on("click", __clear);
 
-			$("#jsonString").focus()
+			$("#jsonString").focus();
 		},
 
 		__parse = function() {
 			if ($.trim($("#jsonString").val()) === "" && $.trim($("#jsonUrl").val()) === "") {
-				new BootstrapPlus.Modal({
+				BootstrapPlus.Modal({
 					header: "Error",
 					body: "<p>You must provide *some* JSON... or at least a URL with some JSON...</p>"
 				});
@@ -104,8 +104,7 @@ CodeDaySpa.BeautifyJsonPage = function(config) {
 				rendered = null,
 				item = null,
 				index = 0,
-				parsed = [],
-				e;
+				parsed = [];
 			
 			if ($("#chkGridResults").attr("checked")) {
 				try {
@@ -185,7 +184,7 @@ CodeDaySpa.BeautifyWsdlPage = function(config) {
 
 		__parse = function() {
 			if ($.trim($("#wsdlUrl").val()) === "") {
-				new BootstrapPlus.Modal({
+				BootstrapPlus.Modal({
 					header: "Error",
 					body: "<p>You must provide a URL with a WSDL document...</p>"
 				});
@@ -239,12 +238,12 @@ CodeDaySpa.BeautifySqlPage = function(config) {
 			$("#btnParse").on("click", __parse);
 			$("#btnClear").on("click", __clear);
 
-			$("#sqlString").focus()
+			$("#sqlString").focus();
 		},
 
 		__parse = function() {
 			if ($.trim($("#sqlString").val()) === "") {
-				new BootstrapPlus.Modal({
+				BootstrapPlus.Modal({
 					header: "Error",
 					body: "<p>You must provide *some* SQL...</p>"
 				});
@@ -300,12 +299,12 @@ CodeDaySpa.CompressJavaScriptPage = function(config) {
 			$("#btnParse").on("click", __parse);
 			$("#btnClear").on("click", __clear);
 
-			$("#jsString").focus()
+			$("#jsString").focus();
 		},
 
 		__parse = function() {
 			if ($.trim($("#jsonString").val()) === "") {
-				new BootstrapPlus.Modal({
+				BootstrapPlus.Modal({
 					header: "Error",
 					body: "<p>You must provide *some* JavaScript...</p>"
 				});
@@ -330,8 +329,7 @@ CodeDaySpa.CompressJavaScriptPage = function(config) {
 				rendered = null,
 				item = null,
 				index = 0,
-				parsed = [],
-				e;
+				parsed = [];
 			
 			if ($("#chkGridResults").attr("checked")) {
 				try {
@@ -386,6 +384,7 @@ CodeDaySpa.CompressJavaScriptPage = function(config) {
 		__clear = function() {
 			$("#resultsContainer").fadeOut("slow", function() {
 				$("#results").html("");
+				$("#jsonString").focus();
 				$("html, body").animate({
 					scrollTop: $("#instructions").offset().top
 				}, 1000);
@@ -398,3 +397,76 @@ CodeDaySpa.CompressJavaScriptPage = function(config) {
 	__init();
 };
 YAOF.attach(CodeDaySpa.CompressJavaScriptPage);
+
+
+CodeDaySpa.BeautifyXmlPage = function(config) {
+	var
+		__init = function() {
+			$("#btnParse").on("click", __parse);
+			$("#btnClear").on("click", __clear);
+
+			$("#xmlString").focus();
+		},
+
+		__parse = function() {
+			if ($.trim($("#xmlString").val()) === "") {
+				BootstrapPlus.Modal({
+					header: "Error",
+					body: "<p>You must provide *some* XML...</p>"
+				});
+				return;
+			}
+
+			CodeDaySpa.block("Beautifying XML...");
+
+			CodeDaySpa.ajax({
+				data: {
+					action: "beautify.xml",
+					xmlString: $("#xmlString").val(),
+					grid: (($("#chkGridResults").attr("checked")) ? true : false)
+				},
+				success: __onParseSuccess,
+				error: __onParseError
+			});
+		},
+
+		__onParseSuccess = function(response) {
+			var 
+				data = response.output,
+				rendered = null,
+				item = null,
+				index = 0,
+				parsed = [],
+				e;
+			
+			rendered = data;
+			$("#results").html(rendered);
+			window.prettyPrint();
+			
+			$("#resultsContainer").show();
+
+			$("html, body").animate({ scrollTop: $("#results").offset().top - 75 }, 1000);
+			CodeDaySpa.unblock();
+		},
+
+		__onParseError = function(xhr) {
+			CodeDaySpa.showAjaxError(xhr);
+		},
+
+		__clear = function() {
+			$("#resultsContainer").fadeOut("slow", function() {
+				$("#results").html("");
+				$("#xmlString").focus();
+				$("html, body").animate({
+					scrollTop: $("#instructions").offset().top
+				}, 1000);
+			});
+		},
+
+		__this = this,
+		__config = $.extend(config, {});
+
+	__init();
+};
+YAOF.attach(CodeDaySpa.BeautifyXmlPage);
+
